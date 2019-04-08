@@ -1,6 +1,7 @@
 import pandas as pd
 import mysql.connector as sql
 
+
 def operation_in_pandas():
     fare_sql_query = 'SELECT * FROM t_fare_info'
 
@@ -17,7 +18,7 @@ def operation_in_pandas():
     dataset['Bookings_Y'] = ((dataset.loc[:, 'Bookings_Y'] / 100) * dataset.loc[:, 'total_booking']).round().astype(int)
 
     results = pd.DataFrame()
-    results[['FlightId','total_booking']] = dataset[['FlightId','total_booking']]
+    results[['FlightId', 'total_booking']] = dataset[['FlightId', 'total_booking']]
     results[['Q', 'X', 'V', 'Y']] = dataset[['Bookings_Q', 'Bookings_X', 'Bookings_V', 'Bookings_Y']]
 
     results['sum'] = dataset.loc[:, 'Bookings_Q'] + dataset.loc[:, 'Bookings_X'] + dataset.loc[:,
@@ -40,6 +41,7 @@ def operation_in_sql():
     df = pd.read_sql_query(sql_query, con=db_connection)
 
     print(df)
+
 
 db_connection = sql.connect(host='localhost', database='practice', user='binay', password='123456')
 
